@@ -1,0 +1,3 @@
+# ninja log v5
+0	428	1653567387	CMakeFiles/lame.dir/native-lib.cpp.o	d933d766bb11e29
+428	492	1653567387	/Users/linjw/workspace/LameDemo/lame/build/intermediates/cmake/debug/obj/arm64-v8a/liblame.so	585faa3864befcc8

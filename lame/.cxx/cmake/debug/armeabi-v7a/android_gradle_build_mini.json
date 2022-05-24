@@ -1,0 +1,27 @@
+{
+  "buildFiles": [
+    "/Users/linjw/workspace/LameDemo/lame/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/linjw/Library/Android/sdk/cmake/3.18.1/bin/ninja",
+      "-C",
+      "/Users/linjw/workspace/LameDemo/lame/.cxx/cmake/debug/armeabi-v7a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/linjw/Library/Android/sdk/cmake/3.18.1/bin/ninja",
+    "-C",
+    "/Users/linjw/workspace/LameDemo/lame/.cxx/cmake/debug/armeabi-v7a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "lame::@6890427a1f51a3e7e1df": {
+      "artifactName": "lame",
+      "abi": "armeabi-v7a",
+      "output": "/Users/linjw/workspace/LameDemo/lame/build/intermediates/cmake/debug/obj/armeabi-v7a/liblame.so",
+      "runtimeFiles": []
+    }
+  }
+}

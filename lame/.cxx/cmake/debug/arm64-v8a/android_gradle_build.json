@@ -1,0 +1,38 @@
+{
+  "buildFiles": [
+    "/Users/linjw/workspace/LameDemo/lame/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/linjw/Library/Android/sdk/cmake/3.18.1/bin/ninja",
+      "-C",
+      "/Users/linjw/workspace/LameDemo/lame/.cxx/cmake/debug/arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/linjw/Library/Android/sdk/cmake/3.18.1/bin/ninja",
+    "-C",
+    "/Users/linjw/workspace/LameDemo/lame/.cxx/cmake/debug/arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "lame::@6890427a1f51a3e7e1df": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "lame",
+      "output": "/Users/linjw/workspace/LameDemo/lame/build/intermediates/cmake/debug/obj/arm64-v8a/liblame.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "/Users/linjw/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang",
+      "cppCompilerExecutable": "/Users/linjw/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}
