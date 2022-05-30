@@ -18,6 +18,7 @@ extern "C" {
  * lame_set_out_samplerate(client, 44100);   // 输出采样率44100
  * lame_set_num_channels(client, 2);         // 通道数2
  * lame_set_brate(client, 128);              // 比特率128kbps
+ * lame_set_quality(client, quality);        // 设置编码质量
  * lame_init_params(client);                 // 初始化参数
  *
  * 第三步: 编码
@@ -27,6 +28,9 @@ extern "C" {
  * int encodeSize = lame_encode_buffer(client, left, null, numSamples, result, resultSize);
  * // 多通道通道混合输入,numSamples为每个通道的采样点数,而不是pcm的总采样点数
  * int encodeSize = lame_encode_buffer_interleaved(client, pcm, numSamples, result, resultSize);
+ *
+ * 第四步: 清理
+ * lame_close(client);
  */
 
 extern "C" JNIEXPORT jstring JNICALL
@@ -51,7 +55,7 @@ Java_me_linjw_lib_lame_LameMp3_setInSampleRate(
         jobject thiz,
         jlong clientPtr,
         jint sampleRate) {
-    lame_global_flags *client = (lame_global_flags *)clientPtr;
+    lame_global_flags *client = reinterpret_cast<lame_global_flags *>(clientPtr);
     LOGD("setInSampleRate(%ld): sampleRate=%d", client, sampleRate);
     return lame_set_in_samplerate(client, sampleRate);
 }
@@ -62,7 +66,7 @@ Java_me_linjw_lib_lame_LameMp3_setOutSampleRate(
         jobject thiz,
         jlong clientPtr,
         jint sampleRate) {
-    lame_global_flags *client = (lame_global_flags *)clientPtr;
+    lame_global_flags *client = reinterpret_cast<lame_global_flags *>(clientPtr);
     LOGD("setOutSampleRate(%ld): sampleRate=%d", client, sampleRate);
     return lame_set_out_samplerate(client, sampleRate);
 }
@@ -73,7 +77,7 @@ Java_me_linjw_lib_lame_LameMp3_setNumChannels(
         jobject thiz,
         jlong clientPtr,
         jint numChannels) {
-    lame_global_flags *client = (lame_global_flags *)clientPtr;
+    lame_global_flags *client = reinterpret_cast<lame_global_flags *>(clientPtr);
     LOGD("setNumChannels(%ld): numChannels=%d", client, numChannels);
     return lame_set_num_channels(client, numChannels);
 }
@@ -84,7 +88,7 @@ Java_me_linjw_lib_lame_LameMp3_setBitRate(
         jobject thiz,
         jlong clientPtr,
         jint bitRate) {
-    lame_global_flags *client = (lame_global_flags *)clientPtr;
+    lame_global_flags *client = reinterpret_cast<lame_global_flags *>(clientPtr);
     LOGD("setBitRate(%ld): bitRate=%d", client, bitRate);
     return lame_set_brate(client, bitRate);
 }
@@ -94,7 +98,7 @@ Java_me_linjw_lib_lame_LameMp3_initParams(
         JNIEnv *env,
         jobject thiz,
         jlong clientPtr) {
-    lame_global_flags *client = (lame_global_flags *)clientPtr;
+    lame_global_flags *client = reinterpret_cast<lame_global_flags *>(clientPtr);
     LOGD("initParams(%ld)", client);
     return lame_init_params(client);
 }
@@ -142,7 +146,7 @@ Java_me_linjw_lib_lame_LameMp3_encode(
     unsigned char *result = (unsigned char *) (*env).GetByteArrayElements(resultBuff, NULL);
     jsize resultSize = (*env).GetArrayLength(resultBuff);
 
-    lame_global_flags *client = (lame_global_flags *)clientPtr;
+    lame_global_flags *client = reinterpret_cast<lame_global_flags *>(clientPtr);
     int encodeSize = lame_encode_buffer(client, left, right, numSamples, result, resultSize);
 
     ReleaseByteArrayElements(env, leftBuff, (jbyte *) left);
@@ -171,7 +175,7 @@ Java_me_linjw_lib_lame_LameMp3_encodeInterleaved(
     unsigned char *result = (unsigned char *) (*env).GetByteArrayElements(resultBuff, NULL);
     jsize resultSize = (*env).GetArrayLength(resultBuff);
 
-    lame_global_flags *client = (lame_global_flags *)clientPtr;
+    lame_global_flags *client = reinterpret_cast<lame_global_flags *>(clientPtr);
     int encodeSize = lame_encode_buffer_interleaved(client, pcm, numSamples, result, resultSize);
 
     ReleaseByteArrayElements(env, pcmBuff, (jbyte *) pcm);
@@ -185,7 +189,7 @@ Java_me_linjw_lib_lame_LameMp3_setQuality(
         jobject thiz,
         jlong clientPtr,
         jint quality) {
-    lame_global_flags *client = (lame_global_flags *)clientPtr;
+    lame_global_flags *client = reinterpret_cast<lame_global_flags *>(clientPtr);
     LOGD("setQuality(%ld): quality=%d", client, quality);
     return lame_set_quality(client, quality);
 }
@@ -195,7 +199,7 @@ Java_me_linjw_lib_lame_LameMp3_close(
         JNIEnv *env,
         jobject thiz,
         jlong clientPtr) {
-    lame_global_flags *client = (lame_global_flags *)clientPtr;
+    lame_global_flags *client = reinterpret_cast<lame_global_flags *>(clientPtr);
     LOGD("close(%ld)", client);
     return lame_close(client);
 }

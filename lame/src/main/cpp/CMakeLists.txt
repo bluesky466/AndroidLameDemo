@@ -13,8 +13,10 @@ add_library(
         SHARED
         native-lib.cpp)
 
-# lame
+# 导入lame头文件
 include_directories(${CMAKE_SOURCE_DIR}/include)
+
+#导入lame静态库
 add_library(mp3lame STATIC IMPORTED)
 set_target_properties(
         mp3lame
@@ -27,5 +29,5 @@ find_library(
 
 target_link_libraries(
         lame
-        mp3lame
+        mp3lame # 链接lame静态库
         ${log-lib})

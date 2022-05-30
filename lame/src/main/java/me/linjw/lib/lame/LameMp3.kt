@@ -30,13 +30,13 @@ class LameMp3 {
 
     private external fun getLameMp3Version(): String
     private external fun createLameMp3Client(): Long
+    private external fun close(client: Long): Int
     private external fun setQuality(client: Long, quality: Int): Int
     private external fun setInSampleRate(client: Long, sampleRate: Int): Int
     private external fun setOutSampleRate(client: Long, sampleRate: Int): Int
     private external fun setBitRate(client: Long, bitRate: Int): Int
     private external fun setNumChannels(client: Long, numChannels: Int): Int
     private external fun initParams(client: Long): Int
-    private external fun close(client: Long): Int
 
     private external fun encode(
         client: Long,
